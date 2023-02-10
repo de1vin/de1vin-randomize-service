@@ -9,19 +9,20 @@ services:
             - MYSQL_PASSWORD=${MYSQL_PASSWORD}
         ports:
             - '${MYSQL_PORT}:3306'
+        volumes:
+            - ./dump:/docker-entrypoint-initdb.d
 
     web:
         image: 'nginx:alpine'
         working_dir: /app
         volumes:
-            - './backend/src:/app'
+            - './app/src:/app'
             - './docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf'
         ports:
-            - '80:80'
+            - '${HTTP_PORT}:80'
 
     backend:
         build: docker/php-fpm
         working_dir: /app
         volumes:
-            - './backend/src:/app'
-            - './docker/php-fpm/php-ini-overrides.ini:/etc/php/8.2/fpm/conf.d/99-overrides.ini'
+            - './app:/app'

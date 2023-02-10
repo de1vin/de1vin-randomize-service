@@ -2,13 +2,13 @@
 
 namespace App\Exception;
 
-use HttpException;
+use RuntimeException;
 use Throwable;
 
 /**
  * Class HttpException
  */
-class AppHttpException extends HttpException
+class HttpException extends RuntimeException
 {
 
 
