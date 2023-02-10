@@ -36,7 +36,7 @@ readonly class RetrieveController
         $data = $this->numberService->findById($id);
 
         if (empty($data)) {
-            throw new HttpException(400, 'Record not found.');
+            throw new HttpException(404, 'Record not found.');
         }
 
         return new JsonResponse($data);
